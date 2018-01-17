@@ -4,7 +4,6 @@ set -e
 configfiles="banned-ips.txt
              banned-players.txt
              ops.txt
-             white-list.txt
              white-list.txt"
 
 for file in $configfiles; do
