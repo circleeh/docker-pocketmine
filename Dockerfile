@@ -67,7 +67,7 @@ COPY src/server.properties src/docker-start.sh /pocketmine/
 
 EXPOSE 19132 19132/udp
 
-VOLUME /config
+VOLUME /config /pocketmine/players /pocketmine/plugins /pocketmine/resource_packs /pocketmine/worlds
 WORKDIR /pocketmine
 
 CMD ["./docker-start.sh"]
