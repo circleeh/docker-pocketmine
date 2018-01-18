@@ -1,3 +1,9 @@
+The included binary (phar) file is licensed under the LGPL. The source 
+code and original project can be found, at the time of this writing, at
+https://github.com/pmmp/PocketMine-MP.  The docker file and scripts found
+in this repository are licensed under the GPL v3, included below for
+ease of reference.  All other software is distributed as per it's license.
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
