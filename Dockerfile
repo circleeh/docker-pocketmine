@@ -12,14 +12,15 @@ LABEL maintainer="chris.poupart@gmail.com"
 ARG OVERLAY_VERSION="v1.21.2.2"
 ARG OVERLAY_ARCH="amd64"
 
-
-
 # As per the documentation, only Development and Alpha are currently being
 # produced as PocketMine is under heavy development.
 # See: http://pmmp.readthedocs.io/en/rtfd/links.html#downloads
-#ENV POCKETMINE_CHANNEL="Alpha"
-# Jenkins is down at the time of writing this, and so we will use the assets available on GitHub
-ENV POCKETMINE_PHAR_URL "https://github.com/pmmp/PocketMine-MP/releases/download/1.7dev-516/PocketMine-MP_1.7dev-516_fbd04b0f_API-3.0.0-ALPHA10.phar"
+
+ARG POCKETMINE_CHANNEL="Alpha"
+ENV PMMP_CHANNEL=$POCKETMINE_CHANNEL
+ARG POCKETMINE_RELEASE="PocketMine-MP_1.7dev-516_fbd04b0f_API-3.0.0-ALPHA10"
+ENV PMMP_RELEASE=$POCKETMINE_RELEASE
+ENV POCKETMINE_PHAR_URL "https://jenkins.pmmp.io/job/PocketMine-MP/${PMMP_CHANNEL}/artifact/${PMMP_RELEASE}.phar"
 
 # Install the dependencies
 RUN \
@@ -97,4 +98,4 @@ VOLUME /config
 WORKDIR /pocketmine
 
 ENTRYPOINT ["/init"]
-CMD ["./docker-start.sh"]
+CMD ["./start.sh", "--no-wizard"]
