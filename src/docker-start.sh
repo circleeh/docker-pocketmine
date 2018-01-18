@@ -1,22 +1,57 @@
 #!/bin/bash
 set -e
 
+# First, let's make sure that all of our directories exist:
+CONFIGDIRS="etc
+            logs
+            players
+            plugins
+            resource_packs
+            worlds"
+
+# Note: this will symlink etc and logs to /pocketmine, and we will never
+# use them. Will leave it as is for now in order to keep the code simple.
+for dir in $CONFIGDIRS; do
+    if [ ! -d /config/${dir} ] && [ ! -e /config/${dir} ]; then
+        mkdir -p /config/${dir}
+        ln -s /config/${dir} /pocketmine/${dir}
+    fi
+done
+
+# Now symlink the config files
 CONFIGFILES="banned-ips.txt
              banned-players.txt
              ops.txt
              white-list.txt"
 
 for file in $CONFIGFILES; do
-    if [ ! -e /config/${file} ]; then
-        touch /config/${file}
+    if [ ! -e /config/etc/${file} ]; then
+        touch /config/etc/${file}
+        ln -s /config/etc/${file} /pocketmine/${file}
     fi
-    ln -s /config/${file} /pocketmine/${file}
 done
+
+# Finally, symlink the log files
+if [ ! -e /config/logs/server.log ]; then
+    touch /config/logs/server.log
+    ln -s /config/logs/server.log /pocketmine/server.log
+fi
 
 # Handle the main configuration file separately since it exists in /pocketmine
 if [ -e /pocketmine/server.properties ] && [ ! -L /pocketmine/server.properties ]; then
-    mv /pocketmine/server.properties /config/server.properties
-    ln -s /config/server.properties /pocketmine/server.properties
+    mv /pocketmine/server.properties /config/etc/server.properties
+    ln -s /config/etc/server.properties /pocketmine/server.properties
+fi
+
+# The yaml configuration file also needs special care, because the server will
+# fail to start if it exists but is empty.
+if [ ! -L /pocketmine/pocketmine.yml ]; then
+    if [ -e /pocketmine/pocketmine.yml ] && [ ! -e /config/etc/pocketmine.yml ]; then
+        mv /pocketmine/pocketmine.yml /config/etc/pocketmine.yml \
+        && ln -s /config/etc/pocketmine.yml /pocketmine/pocketmine.yml
+    elif [ ! -e /pocketmine/pocketmine.yml ] && [ -e /config/etc/pocketmine.yml ]; then
+        ln -s /config/etc/pocketmine.yml /pocketmine/pocketmine.yml
+    fi
 fi
 
 PHP_INI=/usr/local/etc/php/php.ini

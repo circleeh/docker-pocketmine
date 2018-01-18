@@ -57,7 +57,7 @@ RUN apk --update --no-cache \
 # See: https://github.com/krakjoe/pthreads/issues/779
 
 # Now we setup PocketMine
-RUN bash -c "mkdir -p /pocketmine/{players,plugins,resource_packs,worlds}" \
+RUN bash -c "mkdir -p /pocketmine" \
  && cd pocketmine \
  && curl -fsSL https://raw.githubusercontent.com/pmmp/PocketMine-MP/master/start.sh -o start.sh \
  && chmod +x start.sh \
@@ -67,7 +67,7 @@ COPY src/server.properties src/docker-start.sh /pocketmine/
 
 EXPOSE 19132 19132/udp
 
-VOLUME /config /pocketmine/players /pocketmine/plugins /pocketmine/resource_packs /pocketmine/worlds
+VOLUME /config
 WORKDIR /pocketmine
 
 CMD ["./docker-start.sh"]
