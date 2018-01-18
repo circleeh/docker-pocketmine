@@ -14,6 +14,10 @@ LABEL maintainer="chris.poupart@gmail.com"
 # Jenkins is down at the time of writing this, and so we will use the assets available on GitHub
 ENV POCKETMINE_PHAR_URL "https://github.com/pmmp/PocketMine-MP/releases/download/1.7dev-516/PocketMine-MP_1.7dev-516_fbd04b0f_API-3.0.0-ALPHA10.phar"
 
+# Install the s6 overlay for proper process supervision.
+ADD https://github.com/just-containers/s6-overlay/releases/download/v1.21.2.2/s6-overlay-amd64.tar.gz /tmp/
+RUN tar zxf /tmp/s6-overlay-amd64.tar.gz -C /
+
 # Install the dependencies
 RUN apk --update --no-cache \
         add bash \
