@@ -1,5 +1,4 @@
-#!/bin/bash
-set -e
+#!/usr/bin/with-contenv bash
 
 # First, let's make sure that all of our directories exist:
 CONFIGDIRS="etc
@@ -54,6 +53,12 @@ if [ ! -L /pocketmine/pocketmine.yml ]; then
     fi
 fi
 
+# permissions
+chown -R minecraft:minecraft \
+        /config \
+        /pocketmine
+
+# Configure PHP
 PHP_INI=/usr/local/etc/php/php.ini
 TIMEZONE=$(date +%Z)
 if [ ! -e ${PHP_INI} ]; then
@@ -77,5 +82,3 @@ if [ ! -e ${PHP_INI} ]; then
     echo "opcache.memory_consumption=128" >> "${PHP_INI}"
     echo "opcache.optimization_level=0xffffffff" >> "${PHP_INI}"
 fi
-
-cd /pocketmine && ./start.sh --no-wizard

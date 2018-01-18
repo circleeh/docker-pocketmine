@@ -1,0 +1,39 @@
+#!/usr/bin/with-contenv bash
+
+PUID=${PUID:-911}
+PGID=${PGID:-911}
+
+groupmod -o -g "$PGID" minecraft
+usermod -o -u "$PUID" minecraft
+
+echo '
+--------------------------------------
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMNmddmNMMMMMMMMMMMMMMMM
+MMMMMMMMMMMNy/.       `-+yNMMMMMMMMMMM
+MMMMMMMMMh:                /dMMMMMMMMM
+MMMMMMMN:                    +NMMMMMMM
+MMMMMMm.```````` --.       `` -///////
+MMMMMM- syyyyyy+ yy/      .yy-        
+MMMMMd  sys````  yyo/oso- .yy-        
+MMMMMy  syyyyyy- yys.`+yy``yy.        
+MMMMMd  sys      yy+  :yy` ::         
+MMMMMM: syyoooo+ yy/  :yy`.yy-        
+MMMMMMN-.------. --.  `-- `--`        
+MMMMMMMN+                   `sMMMMMMMM
+MMMMMMMMMm+`              .oNMMMMMMMMM
+MMMMMMMMMMMMho:.`    `./odMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMNNNNMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+--------------------------------------
+GID/UID
+--------------------------------------'
+echo "
+User uid:    $(id -u minecraft)
+User gid:    $(id -g minecraft)
+--------------------------------------
+"
+chown minecraft:minecraft /config
+chown minecraft:minecraft /pocketmine
