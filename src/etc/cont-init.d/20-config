@@ -13,8 +13,8 @@ CONFIGDIRS="etc
 for dir in $CONFIGDIRS; do
     if [ ! -d /config/${dir} ] && [ ! -e /config/${dir} ]; then
         mkdir -p /config/${dir}
-        ln -s /config/${dir} /pocketmine/${dir}
     fi
+    ln -s /config/${dir} /pocketmine/${dir}
 done
 
 # Now symlink the config files
@@ -26,8 +26,8 @@ CONFIGFILES="banned-ips.txt
 for file in $CONFIGFILES; do
     if [ ! -e /config/etc/${file} ]; then
         touch /config/etc/${file}
-        ln -s /config/etc/${file} /pocketmine/${file}
     fi
+    ln -s /config/etc/${file} /pocketmine/${file}
 done
 
 # Finally, symlink the log files

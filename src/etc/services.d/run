@@ -1,3 +1,5 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/execlineb -P
 
-exec s6-setuidgid minecraft /pocketmine/start.sh --no-wizard
+with-contenv
+s6-envuidgid minecraft
+cd /pocketmine && ./start.sh --no-wizard
