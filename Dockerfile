@@ -85,8 +85,6 @@ RUN \
 # Now we setup PocketMine
 RUN bash -c "mkdir -p /pocketmine" \
  && cd pocketmine \
- && curl -fsSL https://raw.githubusercontent.com/pmmp/PocketMine-MP/master/start.sh -o start.sh \
- && chmod +x start.sh \
  && curl -fsSL "$POCKETMINE_PHAR_URL" -o PocketMine-MP.phar
 
 # Add local files
@@ -98,4 +96,4 @@ VOLUME /config
 WORKDIR /pocketmine
 
 ENTRYPOINT ["/init"]
-CMD ["./start.sh", "--no-wizard"]
+#CMD ["./start.sh", "--no-wizard"]

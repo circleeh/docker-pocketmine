@@ -1,0 +1,6 @@
+#!/usr/bin/execlineb -P
+
+with-contenv
+s6-envuidgid minecraft
+cd /pocketmine
+/usr/local/bin/php ./PocketMine-MP.phar --no-wizard $@
