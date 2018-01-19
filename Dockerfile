@@ -3,8 +3,13 @@ FROM php:7.2-zts-alpine3.7
 # Set version label.
 ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Circle Eh! version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL build_version="Circle Eh! version: ${VERSION} Build-date: ${BUILD_DATE}"
 LABEL maintainer="chris.poupart@gmail.com"
+
+ARG VCS_REF
+ARG VCS_URL
+LABEL org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url=$VCS_URL
 
 # Global environment settings
 
