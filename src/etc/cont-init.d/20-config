@@ -14,7 +14,9 @@ for dir in $CONFIGDIRS; do
     if [ ! -d /config/${dir} ] && [ ! -e /config/${dir} ]; then
         mkdir -p /config/${dir}
     fi
-    ln -s /config/${dir} /pocketmine/${dir}
+    if [ ! -L /pocketmine/${dir} ]; then
+        ln -s /config/${dir} /pocketmine/${dir}
+    fi
 done
 
 # Now symlink the config files
@@ -27,7 +29,9 @@ for file in $CONFIGFILES; do
     if [ ! -e /config/etc/${file} ]; then
         touch /config/etc/${file}
     fi
-    ln -s /config/etc/${file} /pocketmine/${file}
+    if [ ! -L /pocketmine/${file} ]; then
+        ln -s /config/etc/${file} /pocketmine/${file}
+    fi
 done
 
 # Finally, symlink the log files
