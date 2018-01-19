@@ -53,7 +53,7 @@ RUN \
             yaml-dev \
             zlib-dev \
  && echo "**** install the extra php modules ****" \
- && docker-php-ext-install -j$(nproc) bcmath sockets zip \
+ && docker-php-ext-install -j$(nproc) bcmath mysqli sockets zip \
  && pecl channel-update pecl.php.net \
  && pecl config-set php_ini /usr/local/etc/php/php.ini \
  && pecl install yaml-2.0.0 \
