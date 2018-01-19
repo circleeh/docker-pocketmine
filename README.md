@@ -2,7 +2,9 @@
 [appurl]: https://pmmp.io/
 [hub]: https://hub.docker.com/r/circleeh/
 
-The Circle Eh! team is happy to bring you this release.
+[![](https://images.microbadger.com/badges/version/circleeh/pocketmine.svg)](https://microbadger.com/images/circleeh/pocketmine "Get your own version badge on microbadger.com")
+
+The Circle Eh! team is happy to bring you a high quality PocketMine-MP Docker image.
 
 ## circleeh/pocketmine
 
