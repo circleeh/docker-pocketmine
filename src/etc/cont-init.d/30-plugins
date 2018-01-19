@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv bash
+
+PLUGINS=${PLUGINS:-https://poggit.pmmp.io/r/20052/PureEntitiesX_dev-192.phar}
+
+echo "**** Installing Plugins ****"
+for plugin in ${PLUGINS}; do
+    plugin_name=`echo "${plugin##*/}"`
+    if [ ! -e /config/plugins/${plugin_name} ]; then
+        echo "[ ] installing ${plugin_name}..."
+        wget ${plugin} -O /config/plugins/${plugin_name}
+    else
+        echo "[X] ${plugin_name} is already installed."
+    fi
+done

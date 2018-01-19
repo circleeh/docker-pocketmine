@@ -12,15 +12,40 @@ Server software for Minecraft Pocket Edition written in PHP
 
 # Usage
 
+## CLI
 ```
 docker create --name=pocketmine \
   -v <path to data>:/config \
   -e PGID=<gid> -e PUID=<uid> \
   -e TZ=<timezone> \
   -p 19132:19132 \
+  -p 19132/udp:19132/udp \
   -p 25575:25575 \
   circleeh/pocketmine
 ```
+
+## docker-compose.yml
+```yaml
+version: "2"
+services:
+  pocketcraft:
+    image: circleeh/pocketmine
+    container_name: pocketmine
+    environment:
+      - TZ=America/Montreal
+      - PUID=1000
+      - PGID=1000
+      - PLUGINS=https://poggit.pmmp.io/r/20052/PureEntitiesX_dev-192.phar
+                https://poggit.pmmp.io/r/20015/Worlds_dev-16.phar
+                https://poggit.pmmp.io/r/17958/XBL_PlayerList.phar
+    volumes:
+      - ~/docker/mc:/config
+    ports:
+      - "19132:19132"
+      - "19132/udp:19132/udp"
+      - "25575:25575"
+```
+
 
 Note that port mapping is dependent on the values in your server configuration, so adjust accordingly.
 
@@ -43,6 +68,7 @@ The parameters are split into two halves, separated by a colon, the left hand si
 * `-p 19132` - This is the default PocketMine-MP server port.
 * `-p 25575` - This is the default RCON port.
 * `-v /config` - The local path for all the PocketMine-MP config files.
+* `-e PLUGINS` - A space separated list of the URLs to the phars you wish to install as plugins.
 * `-e PGID` - Group ID - See below
 * `-e PUID` - User ID - See below
 * `-e TZ` - for setting timezone information, etc America/Montreal
