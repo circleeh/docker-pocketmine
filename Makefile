@@ -10,12 +10,16 @@ release: docker_build docker_push output
 DOCKER_IMAGE ?= circleeh/pocketmine
 BINARY ?= .
 
+define GetFromJson
+$(shell curl -s "https://jenkins.pmmp.io/job/PocketMine-MP/$(1)/artifact/build_info.json" | jq -r ".$(2)")
+endef
+
 POCKETMINE_CHANNEL ?= Alpha
-POCKETMINE_RELEASE ?= PocketMine-MP_1.7dev-516_fbd04b0f_API-3.0.0-ALPHA10
-POCKETMINE_RELEASE_SHORT ?= 1.7dev-516
+POCKETMINE_RELEASE ?= $(call GetFromJson,${POCKETMINE_CHANNEL},phar_name)
+POCKETMINE_RELEASE_SHORT ?= $(call GetFromJson,${POCKETMINE_CHANNEL},pm_version)-$(call GetFromJson,${POCKETMINE_CHANNEL},build_number)
 POCKETMINE_CHANNEL_DEV ?= Development
-POCKETMINE_RELEASE_DEV ?= PocketMine-MP_1.7dev-634_8f928915_API-3.0.0-ALPHA10
-POCKETMINE_RELEASE_SHORT_DEV ?= 1.7dev-634
+POCKETMINE_RELEASE_DEV ?= $(call GetFromJson,${POCKETMINE_CHANNEL_DEV},phar_name)
+POCKETMINE_RELEASE_SHORT_DEV ?= $(call GetFromJson,${POCKETMINE_CHANNEL_DEV},pm_version)-$(call GetFromJson,${POCKETMINE_CHANNEL_DEV},build_number)
 
 # Get the latest commit.
 GIT_COMMIT = $(strip $(shell git rev-parse --short HEAD))
