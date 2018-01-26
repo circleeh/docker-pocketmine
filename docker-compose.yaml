@@ -1,0 +1,16 @@
+version: "2"
+services:
+  pocketcraft:
+    image: circleeh/pocketmine:latest
+    restart: always
+    container_name: pocketmine
+    environment:
+      - TZ=America/Montreal
+      - PUID=1000
+      - PGID=1000
+      - PLUGINS=https://poggit.pmmp.io/r/20052/PureEntitiesX_dev-192.phar
+    volumes: 
+      - ~/docker/mc:/config
+    ports:
+      - "19132:19132"
+      - "19132/udp:19132/udp"
