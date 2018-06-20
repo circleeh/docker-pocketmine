@@ -10,10 +10,6 @@ before_script:
 - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
 - docker info
 
-stages:
-- build
-- release
-
 build_development:
   stages: build
   script:
