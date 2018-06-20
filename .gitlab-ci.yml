@@ -10,22 +10,26 @@ before_script:
 - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
 - docker info
 
+stages:
+- build
+- release
+
 build_development:
-  stages: build
+  stage: build
   script:
   - make docker_build_dev
 
 build_stable:
-  stages: build
+  stage: build
   script:
   - make docker_build
 
 release_development:
-  stages: release
+  stage: release
   script:
   - make docker_push_dev
 
 release_production:
-  stages: release
+  stage: release
   script:
   - make docker_push
