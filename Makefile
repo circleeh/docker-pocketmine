@@ -16,10 +16,10 @@ endef
 
 POCKETMINE_CHANNEL ?= Alpha
 POCKETMINE_RELEASE ?= $(call GetFromJson,${POCKETMINE_CHANNEL},phar_name)
-POCKETMINE_RELEASE_SHORT ?= $(call GetFromJson,${POCKETMINE_CHANNEL},pm_version)-$(call GetFromJson,${POCKETMINE_CHANNEL},build_number)
+POCKETMINE_RELEASE_SHORT ?= $(call GetFromJson,${POCKETMINE_CHANNEL},base_version)-$(call GetFromJson,${POCKETMINE_CHANNEL},build_number)
 POCKETMINE_CHANNEL_DEV ?= Development
 POCKETMINE_RELEASE_DEV ?= $(call GetFromJson,${POCKETMINE_CHANNEL_DEV},phar_name)
-POCKETMINE_RELEASE_SHORT_DEV ?= $(call GetFromJson,${POCKETMINE_CHANNEL_DEV},pm_version)-$(call GetFromJson,${POCKETMINE_CHANNEL_DEV},build_number)
+POCKETMINE_RELEASE_SHORT_DEV ?= $(call GetFromJson,${POCKETMINE_CHANNEL_DEV},base_version)-$(call GetFromJson,${POCKETMINE_CHANNEL_DEV},build_number)
 
 # Get the latest commit.
 GIT_COMMIT = $(strip $(shell git rev-parse --short HEAD))
