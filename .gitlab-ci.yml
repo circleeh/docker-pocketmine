@@ -1,0 +1,35 @@
+image: docker:stable
+
+variables:
+  DOCKER_DRIVER: overlay2
+
+services:
+- docker:dind
+
+before_script:
+- docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+- docker info
+
+stages:
+- build
+- release
+
+build_development:
+  stages: build
+  script:
+  - make docker_build_dev
+
+build_stable:
+  stages: build
+  script:
+  - make docker_build
+
+release_development:
+  stages: release
+  script:
+  - make docker_push_dev
+
+release_production:
+  stages: release
+  script:
+  - make docker_push
