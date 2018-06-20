@@ -8,7 +8,7 @@ services:
 
 before_script:
 - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
-- apk add --update make
+- apk add --update make curl jq git
 - docker info
 
 stages:
