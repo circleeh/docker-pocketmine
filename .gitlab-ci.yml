@@ -15,23 +15,23 @@ before_script:
 stages:
 - build
 
+build_development:
+  stage: build
+  script:
+  - make docker_build_dev
+  - make docker_push_dev
+
 build_alpha:
   stage: build
   script:
-  - make docker_build
-  - make docker_push
+  - make docker_build_alpha
+  - make docker_push_alpha
 
 build_beta:
   stage: build
   script:
   - make docker_build_beta
   - make docker_push_beta
-
-build_development:
-  stage: build
-  script:
-  - make docker_build_dev
-  - make docker_push_dev
 
 build_stable:
   stage: build

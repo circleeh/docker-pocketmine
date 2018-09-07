@@ -55,9 +55,9 @@ Note that port mapping is dependent on the values in your server configuration, 
 
 You can choose, using a docker tag, which release of PocketMine-MP you would
 like. We label the docker images with the same version number of the release
-of MocketMine-MP that we include, as well as generic labels for the most recent
-development and alpha releases.  The `latest` tag will pull the most recent
-`alpha` release (and in future, what ever is the most recent *stable* release).
+of PocketMine-MP that we include, as well as generic labels for the most recent
+development, alpha, beta, and stable releases.  The `latest` tag will pull the 
+most recent *stable* release.
 
 Example:
 ```
