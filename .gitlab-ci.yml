@@ -13,31 +13,28 @@ before_script:
 - docker info
 
 stages:
-- Alpha
-- Beta
-- Development
-- Stable
+- build
 
 build_alpha:
-  stage: Alpha
+  stage: build
   script:
   - make docker_build
   - make docker_push
 
 build_beta:
-  stage: Beta
+  stage: build
   script:
   - make docker_build_beta
   - make docker_push_beta
 
 build_development:
-  stage: Development
+  stage: build
   script:
   - make docker_build_dev
   - make docker_push_dev
 
 build_stable:
-  stage: Stable
+  stage: build
   script:
   - make docker_build_stable
   - make docker_push_stable
