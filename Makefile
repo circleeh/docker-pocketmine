@@ -64,7 +64,7 @@ else
 DOCKER_TAG = $(CODE_VERSION)-$(GIT_COMMIT)$(DOCKER_TAG_SUFFIX)
 endif
 
-docker_build:
+docker_build_alpha:
 	# Build Docker image
 	docker build \
   --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
@@ -105,14 +105,15 @@ docker_build_stable:
   --build-arg POCKETMINE_RELEASE=$(POCKETMINE_RELEASE_STABLE) \
 	-t $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_STABLE) .
 
-docker_push:
-	# Tag image as latest
-	docker tag $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT) $(DOCKER_IMAGE):latest
-	docker tag $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT) $(DOCKER_IMAGE):alpha
+docker_push_dev:
+	docker tag $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_DEV) $(DOCKER_IMAGE):development
+	docker push $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_DEV)
+	docker push $(DOCKER_IMAGE):development
 
+docker_push_alpha:
+	docker tag $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT) $(DOCKER_IMAGE):alpha
 	# Push to DockerHub
 	docker push $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT)
-	docker push $(DOCKER_IMAGE):latest
 	docker push $(DOCKER_IMAGE):alpha
 
 docker_push_beta:
@@ -120,14 +121,12 @@ docker_push_beta:
 	docker push $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_BETA)
 	docker push $(DOCKER_IMAGE):beta
 
-docker_push_dev:
-	docker tag $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_DEV) $(DOCKER_IMAGE):development
-	docker push $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_DEV)
-	docker push $(DOCKER_IMAGE):development
-
 docker_push_stable:
+	# Tag image as latest
+	docker tag $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_STABLE) $(DOCKER_IMAGE):latest
 	docker tag $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_STABLE) $(DOCKER_IMAGE):stable
 	docker push $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_STABLE)
+	docker push $(DOCKER_IMAGE):latest
 	docker push $(DOCKER_IMAGE):stable
 
 output:
