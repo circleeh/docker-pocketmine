@@ -41,9 +41,14 @@ if [ ! -e /config/logs/server.log ]; then
 fi
 
 # Handle the main configuration file separately since it exists in /pocketmine
-if [ -e /pocketmine/server.properties ] && [ ! -L /pocketmine/server.properties ]; then
-    mv /pocketmine/server.properties /config/etc/server.properties
-    ln -s /config/etc/server.properties /pocketmine/server.properties
+if [ ! -L /pocketmine/server.properties ]; then
+    if [ -e /pocketmine/server.properties ] && [ ! -e /config/etc/server.properties ]; then
+        mv /pocketmine/server.properties /config/etc/server.properties \
+        && ln -s /config/etc/server.properties /pocketmine/server.properties
+    elif [ -e /pocketmine/server.properties ] && [ -e /config/etc/server.properties ]; then
+        rm /pocketmine/server.properties \
+        && ln -s /config/etc/server.properties /pocketmine/server.properties
+    fi
 fi
 
 # The yaml configuration file also needs special care, because the server will
