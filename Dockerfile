@@ -14,7 +14,7 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
 # Global environment settings
 
 # set the version for the s6 overlay
-ARG OVERLAY_VERSION="v1.21.4.0"
+ARG OVERLAY_VERSION="v1.22.0.0"
 ARG OVERLAY_ARCH="amd64"
 
 # As per the documentation, only Development and Alpha are currently being

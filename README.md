@@ -37,7 +37,7 @@ services:
       - TZ=America/Montreal
       - PUID=1000
       - PGID=1000
-      - PLUGINS=https://poggit.pmmp.io/r/20052/PureEntitiesX_dev-192.phar
+      - PLUGINS=https://poggit.pmmp.io/r/42013/PureEntitiesX.phar
                 https://poggit.pmmp.io/r/20015/Worlds_dev-16.phar
                 https://poggit.pmmp.io/r/17958/XBL_PlayerList.phar
     volumes:
@@ -56,7 +56,7 @@ Note that port mapping is dependent on the values in your server configuration, 
 You can choose, using a docker tag, which release of PocketMine-MP you would
 like. We label the docker images with the same version number of the release
 of PocketMine-MP that we include, as well as generic labels for the most recent
-development, alpha, beta, and stable releases.  The `latest` tag will pull the 
+development, alpha, beta, and stable releases.  The `latest` tag will pull the
 most recent *stable* release.
 
 Example:

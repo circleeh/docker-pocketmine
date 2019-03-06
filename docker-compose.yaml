@@ -8,7 +8,7 @@ services:
       - TZ=America/Montreal
       - PUID=1000
       - PGID=1000
-      - PLUGINS=https://poggit.pmmp.io/r/20052/PureEntitiesX_dev-192.phar
+      - PLUGINS=https://poggit.pmmp.io/r/42013/PureEntitiesX.phar
     volumes: 
       - ~/docker/mc:/config
     ports:

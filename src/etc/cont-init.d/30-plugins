@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bash
 
-PLUGINS=${PLUGINS:-https://poggit.pmmp.io/r/20052/PureEntitiesX_dev-192.phar}
+PLUGINS=${PLUGINS:-https://poggit.pmmp.io/r/42013/PureEntitiesX.phar}
 
 echo "**** Installing Plugins ****"
 for plugin in ${PLUGINS}; do
