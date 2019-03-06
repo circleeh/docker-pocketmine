@@ -15,12 +15,6 @@ before_script:
 stages:
 - build
 
-build_development:
-  stage: build
-  script:
-  - make docker_build_dev
-  - make docker_push_dev
-
 build_alpha:
   stage: build
   script:

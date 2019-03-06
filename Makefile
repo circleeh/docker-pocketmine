@@ -20,9 +20,6 @@ POCKETMINE_RELEASE_SHORT ?= $(call GetFromJson,${POCKETMINE_CHANNEL},base_versio
 POCKETMINE_CHANNEL_BETA ?= Beta
 POCKETMINE_RELEASE_BETA ?= $(call GetFromJson,${POCKETMINE_CHANNEL_BETA},phar_name)
 POCKETMINE_RELEASE_SHORT_BETA ?= $(call GetFromJson,${POCKETMINE_CHANNEL_BETA},base_version)-$(call GetFromJson,${POCKETMINE_CHANNEL_BETA},build_number)
-POCKETMINE_CHANNEL_DEV ?= Development
-POCKETMINE_RELEASE_DEV ?= $(call GetFromJson,${POCKETMINE_CHANNEL_DEV},phar_name)
-POCKETMINE_RELEASE_SHORT_DEV ?= $(call GetFromJson,${POCKETMINE_CHANNEL_DEV},base_version)-$(call GetFromJson,${POCKETMINE_CHANNEL_DEV},build_number)
 POCKETMINE_CHANNEL_STABLE ?= Stable
 POCKETMINE_RELEASE_STABLE ?= $(call GetFromJson,${POCKETMINE_CHANNEL_STABLE},phar_name)
 POCKETMINE_RELEASE_SHORT_STABLE ?= $(call GetFromJson,${POCKETMINE_CHANNEL_STABLE},base_version)-$(call GetFromJson,${POCKETMINE_CHANNEL_STABLE},build_number)
@@ -85,16 +82,6 @@ docker_build_beta:
   --build-arg POCKETMINE_RELEASE=$(POCKETMINE_RELEASE_BETA) \
 	-t $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_BETA) .
 
-docker_build_dev:
-	docker build \
-  --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-  --build-arg VERSION=$(CODE_VERSION) \
-  --build-arg VCS_URL=`git config --get remote.origin.url` \
-  --build-arg VCS_REF=$(GIT_COMMIT) \
-  --build-arg POCKETMINE_CHANNEL=$(POCKETMINE_CHANNEL_DEV) \
-  --build-arg POCKETMINE_RELEASE=$(POCKETMINE_RELEASE_DEV) \
-	-t $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_DEV) .
-
 docker_build_stable:
 	docker build \
   --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
@@ -104,11 +91,6 @@ docker_build_stable:
   --build-arg POCKETMINE_CHANNEL=$(POCKETMINE_CHANNEL_STABLE) \
   --build-arg POCKETMINE_RELEASE=$(POCKETMINE_RELEASE_STABLE) \
 	-t $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_STABLE) .
-
-docker_push_dev:
-	docker tag $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_DEV) $(DOCKER_IMAGE):development
-	docker push $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_DEV)
-	docker push $(DOCKER_IMAGE):development
 
 docker_push_alpha:
 	docker tag $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT) $(DOCKER_IMAGE):alpha
@@ -130,4 +112,4 @@ docker_push_stable:
 	docker push $(DOCKER_IMAGE):stable
 
 output:
-	@echo Docker Image: $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_DEV)
+	@echo Docker Image: $(DOCKER_IMAGE):$(POCKETMINE_RELEASE_SHORT_STABLE)
