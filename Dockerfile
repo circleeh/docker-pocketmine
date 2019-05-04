@@ -71,6 +71,14 @@ RUN \
  && cp modules/pthreads.so /usr/local/lib/php/extensions/no-debug-zts-20170718/pthreads.so \
  && echo "extension=pthreads.so" > /usr/local/etc/php/conf.d/git_pthreads.ini \
  && cd .. && rm -rf pthreads \
+ && git clone -b master --single-branch https://github.com/pmmp/PocketMine-C-ChunkUtils.git \
+ && cd PocketMine-C-ChunkUtils \
+ && phpize \
+ && ./configure \
+ && make \
+ && cp modules/pocketmine_chunkutils.so /usr/local/lib/php/extensions/no-debug-zts-20170718/pocketmine_chunkutils.so \
+ && echo "extension=pocketmine_chunkutils.so" > /usr/local/etc/php/conf.d/git_pocketmine_chunkutils.ini \
+ && cd .. && rm -rf PocketMine-C-ChunkUtils \
  && echo "**** add s6 overlay ****" \
  && curl -o \
             /tmp/s6-overlay.tar.gz -L \
