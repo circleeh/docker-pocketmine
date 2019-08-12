@@ -21,12 +21,6 @@ build_alpha:
   - make docker_build_alpha
   - make docker_push_alpha
 
-build_beta:
-  stage: build
-  script:
-  - make docker_build_beta
-  - make docker_push_beta
-
 build_stable:
   stage: build
   script:
